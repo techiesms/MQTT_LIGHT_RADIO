@@ -23,14 +23,14 @@
 
 /************************* WiFi Access Point *********************************/
 
-#define WLAN_SSID       "ssid_name"
-#define WLAN_PASS       "Password"
+#define WLAN_SSID       "ssid name"
+#define WLAN_PASS       "password"
 
 /************************* Adafruit.io Setup *********************************/
 
 #define AIO_SERVER      "io.adafruit.com"
 #define AIO_SERVERPORT  1883                   // use 8883 for SSL
-#define AIO_USERNAME    "username"
+#define AIO_USERNAME    "USERNAME"
 #define AIO_KEY         "AIO key"
 
 /************ Global State (you don't need to change this!) ******************/
@@ -40,14 +40,8 @@ WiFiClient client;
 // or... use WiFiFlientSecure for SSL
 //WiFiClientSecure client;
 
-// Store the MQTT server, username, and password in flash memory.
-// This is required for using the Adafruit MQTT library.
-const char MQTT_SERVER[] PROGMEM    = AIO_SERVER;
-const char MQTT_USERNAME[] PROGMEM  = AIO_USERNAME;
-const char MQTT_PASSWORD[] PROGMEM  = AIO_KEY;
-
 // Setup the MQTT client class by passing in the WiFi client and MQTT server and login details.
-Adafruit_MQTT_Client mqtt(&client, MQTT_SERVER, AIO_SERVERPORT, MQTT_USERNAME, MQTT_PASSWORD);
+Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_KEY);
 
 /****************************** Feeds ***************************************/
 
@@ -57,11 +51,10 @@ Adafruit_MQTT_Client mqtt(&client, MQTT_SERVER, AIO_SERVERPORT, MQTT_USERNAME, M
 //Adafruit_MQTT_Publish photocell = Adafruit_MQTT_Publish(&mqtt, PHOTOCELL_FEED);
 
 // Setup a feed called 'onoff' for subscribing to changes.
-const char Relay1[] PROGMEM = AIO_USERNAME "/feeds/Light";
-Adafruit_MQTT_Subscribe Light = Adafruit_MQTT_Subscribe(&mqtt, Relay1);
 
-const char Relay2[] PROGMEM = AIO_USERNAME "/feeds/Radio";
-Adafruit_MQTT_Subscribe Radio = Adafruit_MQTT_Subscribe(&mqtt, Relay2);
+Adafruit_MQTT_Subscribe Light = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/Light");
+
+Adafruit_MQTT_Subscribe Radio = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/Radio");
 /*************************** Sketch Code ************************************/
 
 // Bug workaround for Arduino 1.6.6, it seems to need a function declaration
