@@ -15,7 +15,7 @@
   Written by Tony DiCola for Adafruit Industries.
   MIT license, all text above must be included in any redistribution
 
-  visit www.techiesms,com for projects on MQTT protocols
+  visit www.techiesms.com for projects on MQTT protocols
  ****************************************************/
 #include <ESP8266WiFi.h>
 #include "Adafruit_MQTT.h"
